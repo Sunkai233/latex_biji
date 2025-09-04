@@ -1,0 +1,326 @@
+%!TEX program = xelatex
+\documentclass[a4paper,12pt]{ctexart}
+
+% 基础包
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{enumitem}
+
+% 页面设置（参考GB标准）
+\geometry{
+    left=25mm,
+    right=15mm,
+    top=30mm,
+    bottom=24mm,
+    headsep=5mm,
+    footskip=4mm
+}
+
+% 行间距
+\linespread{1.5}
+
+% 章节格式设置（GB风格）
+\ctexset{
+    section = {
+        name = {},
+        number = {\arabic{section}},
+        format = {\zihao{-4}\heiti},
+        beforeskip = {3.3ex plus .2ex},
+        afterskip = {2.3ex plus .2ex},
+    },
+    subsection = {
+        name = {},
+        number = {\arabic{section}.\arabic{subsection}},
+        format = {\zihao{5}\heiti},
+        beforeskip = {-.5em plus -.1em minus -.1em},
+        afterskip = {.5em plus .1em},
+    },
+    subsubsection = {
+        name = {},
+        number = {\arabic{section}.\arabic{subsection}.\arabic{subsubsection}},
+        format = {\zihao{5}\songti},
+        beforeskip = {-.5em plus -.1em minus -.1em},
+        afterskip = {.5em plus .1em},
+    }
+}
+
+% 图表标题格式（GB风格）
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+\renewcommand{\thefigure}{图~\thesection.\arabic{figure}}
+\renewcommand{\thetable}{表~\thesection.\arabic{table}}
+\captionsetup{
+    font={small,bf},
+    labelfont=bf,
+    textfont=bf,
+    format=plain,
+    justification=centering,
+    skip=3pt
+}
+
+% 摘要环境
+\newenvironment{cnabstract}{
+    \section*{\heiti\zihao{-4} 摘要}
+    \zihao{5}\fangsong
+}{}
+
+% 关键词
+\newcommand{\cnkeywords}[1]{
+    \vspace{1em}
+    \noindent{\heiti\zihao{5} 关键词：}
+    \zihao{5}\fangsong #1
+}
+
+% 英文摘要
+\newenvironment{enabstract}{
+    \section*{\textbf{\zihao{-4} Abstract}}
+    \zihao{5}
+}{}
+
+\newcommand{\enkeywords}[1]{
+    \vspace{1em}
+    \noindent{\textbf{\zihao{5} Keywords: }}
+    \zihao{5} #1
+}
+
+% 致谢环境
+\newenvironment{acknowledgments}{
+    \section*{\heiti\zihao{-4} 致谢}
+    \zihao{5}\kaishu
+}{}
+
+% 页眉页脚
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\zihao{5}\heiti 学术论文编写规则示例}
+\fancyfoot[C]{\zihao{-5}\songti\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+\begin{document}
+
+% 题名页
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+
+% 标题
+{\zihao{2}\heiti\bfseries
+基于深度学习的图像识别算法研究与应用\\[0.5cm]
+\zihao{3}\textbf{Research and Application of Image Recognition Algorithm Based on Deep Learning}
+}
+
+\vspace{2cm}
+
+% 作者信息
+{\zihao{4}\kaishu
+作者姓名$^{1}$，作者姓名$^{2}$，作者姓名$^{1}$\\[0.3cm]
+}
+
+{\zihao{5}\songti
+(1. 清华大学计算机科学与技术系，北京 100084；\\
+ 2. 中科院计算技术研究所，北京 100190)
+}
+
+\vspace{1cm}
+
+% 基金项目
+{\zihao{5}\songti
+\textbf{基金项目：}国家自然科学基金项目(62177032)
+}
+
+\vfill
+
+% 日期
+{\zihao{4}\songti
+\today
+}
+
+\end{titlepage}
+
+% 摘要页
+\newpage
+\thispagestyle{plain}
+
+% 中文摘要
+\begin{cnabstract}
+随着人工智能技术的快速发展，深度学习在图像识别领域取得了突破性进展。本文针对传统图像识别算法在复杂场景下识别精度不高、泛化能力不强的问题，提出了一种基于改进卷积神经网络的图像识别算法。该算法采用残差网络结构，引入注意力机制，并结合数据增强技术，有效提高了模型的识别精度和鲁棒性。实验结果表明，在CIFAR-10数据集上，所提算法的识别准确率达到95.8\%，相比传统算法提升了8.3个百分点。在实际应用中，该算法在医学影像诊断、自动驾驶、工业质检等领域展现出良好的应用前景。
+\end{cnabstract}
+
+\cnkeywords{深度学习；图像识别；卷积神经网络；注意力机制；数据增强}
+
+\vspace{2em}
+
+% 英文摘要
+\begin{enabstract}
+With the rapid development of artificial intelligence technology, deep learning has made breakthrough progress in the field of image recognition. Aiming at the problems of low recognition accuracy and weak generalization ability of traditional image recognition algorithms in complex scenes, this paper proposes an image recognition algorithm based on improved convolutional neural network. The algorithm adopts residual network structure, introduces attention mechanism, and combines data enhancement technology to effectively improve the recognition accuracy and robustness of the model. Experimental results show that on the CIFAR-10 dataset, the recognition accuracy of the proposed algorithm reaches 95.8\%, which is 8.3 percentage points higher than traditional algorithms. In practical applications, the algorithm shows good application prospects in medical image diagnosis, autonomous driving, industrial quality inspection and other fields.
+\end{enabstract}
+
+\enkeywords{deep learning; image recognition; convolutional neural network; attention mechanism; data augmentation}
+
+% 目录
+\newpage
+\tableofcontents
+
+% 正文开始
+\newpage
+\setcounter{page}{1}
+
+\section{范围}
+
+本文件规定了学术论文的组成部分以及撰写和编排的基本要求与格式。
+
+本文件适用于印刷版、缩微版、电子版等所有传播形式的学术论文。不同学科或领域的学术论文可参考本文件制定本学科或领域的编写规范。
+
+\section{规范性引用文件}
+
+下列文件中的内容通过文中的规范性引用而构成本文件必不可少的条款。其中，注日期的引用文件，仅该日期对应的版本适用于本文件；不注日期的引用文件，其最新版本（包括所有的修改单）适用于本文件。
+
+\begin{itemize}[leftmargin=2em]
+\item GB 3100 国际单位制及其应用
+\item GB/T 3101 有关量、单位和符号的一般原则
+\item GB/T 6447 文摘编写规则
+\item GB/T 7714 信息与文献 参考文献著录规则
+\item GB/T 15834 标点符号用法
+\item GB/T 15835 出版物上数字用法
+\end{itemize}
+
+\section{术语和定义}
+
+下列术语和定义适用于本文件。
+
+\subsection{学术论文}
+
+对某个学科领域中的学术问题进行研究后，记录科学研究的过程、方法及结果，用于进行学术交流、讨论或出版发表，或用作其他用途的书面材料。
+
+注：在不引起混淆的情况下，本文件中的"学术论文"简称为"论文"。
+
+\subsection{正文部分}
+
+论文的核心部分，通常由引言开始，描述相关理论、实验（试验）、方法、假设和程序，陈述结果并进行讨论分析，阐明结论，以参考文献结尾。
+
+\subsection{参考文献}
+
+对一个信息资源或其中一部分进行准确和详细著录的数据，位于文末或文中的信息源。
+
+\section{组成部分}
+
+\subsection{一般要求}
+
+论文一般包括以下3个组成部分：
+\begin{enumerate}[label=\alph*)]
+\item 前置部分；
+\item 正文部分；
+\item 附录部分。
+\end{enumerate}
+
+\subsection{前置部分}
+
+\subsubsection{题名}
+
+题名是论文的总纲，是反映论文中重要特定内容的恰当、简明的词语的逻辑组合。
+
+题名中的词语应有助于选定关键词和编制题录、索引等二次文献所需的实用信息，应使用标准术语、学名全称、药物和化学品通用名称，不应使用广义术语、夸张词语等。
+
+为便于交流和利用，题名应简明，一般不宜超过25字。为利于国际交流，论文宜有外文（多用英文）题名。
+
+\subsubsection{作者信息}
+
+论文应有作者信息。作者信息具有以下意义：拥有著作权的声明；文责自负的承诺；联系作者的渠道。
+
+作者信息的内容，一般包括作者姓名、工作单位及通信方式等。为利于国际交流，论文宜有与中文对应的外文（多用英文）作者信息。
+
+\section{编排格式}
+
+\subsection{一般要求}
+
+论文应遵守《中华人民共和国国家通用语言文字法》，采用国务院发布的《通用规范汉字表》的规范汉字编写，遣词造句应符合汉语语法，标点符号使用应符合GB/T 15834的规定。
+
+印刷版论文宜用A4幅面纸张。用纸、用墨、版面设计等应便于论文的印刷、装订、阅读、复制和缩微。
+
+\subsection{编号}
+
+\subsubsection{一般要求}
+
+为使论文条理清晰，易于辨认和引用，章、节、条、款、项、段以及插图、表格、数学式等的编号方法，应符合相关标准的规定。
+
+\subsubsection{章节编号}
+
+正文部分应根据需要划分章节，一般不宜超过4级。章应有标题，节宜有标题，但在某一章或节中，同一层次的节，有无标题应统一。章节标题一般不宜超过15字。
+
+章节的编号宜采用阿拉伯数字。不同层次章节数字之间用下圆点相隔，末位数字后不加点号。
+
+\section{实验示例}
+
+\subsection{表格示例}
+
+表\ref{tab:example}展示了不同算法的性能对比。
+
+\begin{table}[htbp]
+\centering
+\caption{算法性能对比}
+\label{tab:example}
+\begin{tabular}{ccc}
+\toprule
+\textbf{算法} & \textbf{准确率(\%)} & \textbf{处理时间(ms)} \\
+\midrule
+传统算法 & 87.5 & 120 \\
+改进算法 & 95.8 & 95 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{数学公式示例}
+
+卷积神经网络的前向传播过程可以表示为：
+
+\begin{equation}
+y = f(Wx + b)
+\label{eq:forward}
+\end{equation}
+
+式中：$y$为输出，$W$为权重矩阵，$x$为输入，$b$为偏置，$f$为激活函数。
+
+\section{结论}
+
+本文提出的学术论文编写规则为规范化的学术写作提供了重要指导。通过遵循这些规则，可以有效提高论文的质量和可读性，促进学术交流与合作。
+
+\begin{acknowledgments}
+感谢所有参与本研究的同事和审稿专家提出的宝贵意见和建议。
+\end{acknowledgments}
+
+% 参考文献
+\newpage
+\begin{thebibliography}{99}
+
+\bibitem{ref1}
+GB/T 3179—2009 期刊编排格式[S]. 北京：中国标准出版社，2009.
+
+\bibitem{ref2}
+中国科学技术信息研究所，北京图书馆. 汉语主题词表：工程技术卷：第1-13册[M]. 北京：科学技术文献出版社，2014.
+
+\bibitem{ref3}
+中国科学技术信息研究所，北京图书馆. 汉语主题词表：自然科学卷：第1-5册[M]. 北京：科学技术文献出版社，2018.
+
+\bibitem{ref4}
+国际计量局. 国际单位制(SI)[M]. 7版. 北京：科学出版社，2000.
+
+\bibitem{ref5}
+中华人民共和国国家通用语言文字法（中华人民共和国主席令第37号）[S]. 2000.
+
+\bibitem{ref6}
+国务院关于公布《通用规范汉字表》的通知（国发[2013]23号）[S]. 2013.
+
+\end{thebibliography}
+
+\end{document}
